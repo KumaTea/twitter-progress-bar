@@ -19,7 +19,7 @@ def calc_coord(ppl, xrange=200, yrange=200):
     elif 37.5 <= ppl < 62.5:
         return [-yrange/tgt, -yrange]
     elif 62.5 <= ppl < 87.5:
-        return [-xrange, tgt*xrange]
+        return [-xrange, -tgt*xrange]
     else:  # ppl >= 87.5 or <= 12.5
         return [yrange/tgt, yrange]
 
