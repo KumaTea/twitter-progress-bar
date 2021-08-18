@@ -23,5 +23,5 @@ def get_session():
     return tweepy.API(token_auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
 
-print('Getting session...')
+print('  Getting session...')
 kuma = get_session()
