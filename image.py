@@ -48,8 +48,9 @@ def gen_progress_image(ppl, xrange=200, yrange=200):
 
 
 def gen_profile_image(progress, total_ppl, font_size=16, ppl=None):
+    # ppl should be int if given
     if not ppl:
-        ppl = str(total_ppl)[-2:]
+        ppl = int(str(total_ppl)[-2:])
 
     original = Image.open(original_path)
     profile = Image.new("RGBA", original.size)
@@ -66,6 +67,8 @@ def gen_profile_image(progress, total_ppl, font_size=16, ppl=None):
     draw.text((5, 5), date, font=fnt, fill=(0, 0, 0, 255))
     draw.text((10, 5+font_size), time, font=fnt, fill=(0, 0, 0, 255))
     draw.text((350, 5), str(total_ppl), font=fnt2, fill=(0, 0, 0, 255))
+    if ppl == 0:
+        ppl = 100
     draw.text((350, 5+font_size+8), f'{ppl}%', font=fnt2, fill=(0, 0, 0, 255))
     profile = Image.alpha_composite(profile, txt)
 

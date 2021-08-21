@@ -35,15 +35,9 @@ def calc_polygon(coord, xrange=200, yrange=200):
     elif x > 0 and y == yrange:
         polygon = [[0, 0], [0, yrange], coord]
     elif x == xrange:
-        # elif x == xrange and y > 0:
         polygon = [[0, 0], [0, yrange], [xrange, yrange], coord]
-    # elif x == xrange and y < 0:
-    #     polygon = [[0,0], [0,yrange], [xrange,yrange], coord]
     elif y == -yrange:
-        # elif x > 0 and y == -yrange:
         polygon = [[0, 0], [0, yrange], [xrange, yrange], [xrange, -yrange], coord]
-    # elif x < 0 and y == -yrange:
-    #     polygon = [[0,0], [0,yrange], [xrange,yrange], [xrange,-yrange], coord]
     elif x == -xrange:
         polygon = [[0, 0], [0, yrange], [xrange, yrange], [xrange, -yrange], [-xrange, -yrange], coord]
     else:  # x < 0 and y == yrange

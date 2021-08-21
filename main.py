@@ -8,8 +8,11 @@ if __name__ == '__main__':
     followers = me.followers_count
     print('    Followers:', followers)
     ppl = int(str(followers)[-2:])
-    with open('foer.txt', 'r') as f:
-        old_foer = f.read()
+    try:
+        with open('foer.txt', 'r') as f:
+            old_foer = f.read()
+    except:
+        old_foer = 0
     if int(old_foer) == followers:
         print('  No changes!')
         exit(0)
