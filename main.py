@@ -1,11 +1,12 @@
 from image import *
 from session import kuma
+from symlink import symlink
 
 
 if __name__ == '__main__':
     print('  Getting info...')
     me = kuma.me()
-    followers = me.followers_count
+    followers = me.followers_count - 1  # API gives one more for no reason
     print('    Followers:', followers)
     ppl = int(str(followers)[-2:])
     try:
@@ -32,4 +33,5 @@ if __name__ == '__main__':
 
     print('  Setting new profile image...')
     kuma.update_profile_image(file_path)
+    symlink(file_path)
     print('  Done')

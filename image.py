@@ -38,6 +38,7 @@ def gen_progress_image(ppl, xrange=200, yrange=200):
         for j in range(len(mask[i])):
             if mask[i][j] == 255:
                 mask[i][j] = progress_array[:, :, 3][i][j]
+    # mask = [[progress_array[:, :, 3][i][j] if mask[i][j] == 255 else mask[i][j] for j in range(len(mask[i]))] for i in range(len(mask))]
 
     # transparency (4th column)
     new_progress_array[:, :, 3] = mask
