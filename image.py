@@ -11,6 +11,7 @@ head_path = 'img/char.png'
 back_path = 'img/back.png'
 original_path = 'img/original.jpg'
 now = datetime.now()
+repo_link = 'git.io/tprog'
 
 
 def gen_progress_image(ppl, xrange=200, yrange=200):
@@ -62,12 +63,14 @@ def gen_profile_image(progress, total_ppl, font_size=16, ppl=None):
     txt = Image.new("RGBA", original.size, (255, 255, 255, 0))
     fnt = ImageFont.truetype('calibri.ttf', font_size)
     fnt2 = ImageFont.truetype('calibri.ttf', font_size+8)
+    fnt3 = ImageFont.truetype('calibri.ttf', font_size+4)
     draw = ImageDraw.Draw(txt)
     date = now.strftime('%Y-%m-%d')
     time = now.strftime('%H:%M:%S')
     draw.text((5, 5), date, font=fnt, fill=(0, 0, 0, 255))
     draw.text((10, 5+font_size), time, font=fnt, fill=(0, 0, 0, 255))
     draw.text((350, 5), str(total_ppl), font=fnt2, fill=(0, 0, 0, 255))
+    draw.text((5, 355), f'src:\n{repo_link}', font=fnt3, fill=(0, 0, 0, 255))
     if ppl == 0:
         ppl = 100
     draw.text((350, 5+font_size+8), f'{ppl}%', font=fnt2, fill=(0, 0, 0, 255))

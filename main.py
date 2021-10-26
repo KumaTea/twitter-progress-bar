@@ -5,8 +5,11 @@ from symlink import symlink
 
 if __name__ == '__main__':
     print('  Getting info...')
-    me = kuma.me()
-    followers = me.followers_count - 1  # API gives one more for no reason
+    try:
+        me = kuma.me()
+    except AttributeError:  # tweepy v4
+        me = kuma.get_user(screen_name='KumaTea0')
+    followers = me.followers_count
     print('    Followers:', followers)
     ppl = int(str(followers)[-2:])
     try:
