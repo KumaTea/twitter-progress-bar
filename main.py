@@ -1,15 +1,35 @@
 from image import *
-from session import kuma
+from time import sleep
 from symlink import symlink
+from sessionWeb import kuma, driver
+
+
+def get_followers_count(user):
+    url = f'https://twitter.com/{user}'
+    driver.get(url)
+    sleep(1)
+    href = f'/{user}/followers'
+    followers_element = driver.find_element_by_xpath(f'//a[@href=\"{href}\"]')
+    followers_count_text = followers_element.find_element_by_tag_name('span').find_element_by_tag_name('span').text
+    driver.get('about:blank')
+    return int(followers_count_text.replace(',', ''))
+
+
+def get_followers():
+    return get_followers_count('KumaTea0')
 
 
 if __name__ == '__main__':
     print('  Getting info...')
     try:
-        me = kuma.me()
-    except AttributeError:  # tweepy v4
-        me = kuma.get_user(screen_name='KumaTea0')
-    followers = me.followers_count
+        followers = get_followers()
+    except:
+        print('    Failed to get followers count using Selenium.')
+        try:
+            me = kuma.me()
+        except AttributeError:  # tweepy v4
+            me = kuma.get_user(screen_name='KumaTea0')
+        followers = me.followers_count
     print('    Followers:', followers)
     ppl = int(str(followers)[-2:])
     try:
