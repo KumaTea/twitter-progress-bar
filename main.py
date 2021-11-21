@@ -20,17 +20,23 @@ def get_followers():
 
 
 if __name__ == '__main__':
+    # Get followers count
     print('  Getting info...')
     try:
         followers = get_followers()
-    except:
-        print('    Failed to get followers count using Selenium.')
+        using_selenium = True
+    except Exception as e:
+        print('    Failed to get followers count using Selenium:')
+        print('      ' + str(e))
         try:
             me = kuma.me()
         except AttributeError:  # tweepy v4
             me = kuma.get_user(screen_name='KumaTea0')
         followers = me.followers_count
+        using_selenium = False
     print('    Followers:', followers)
+
+    # Get last followers count
     ppl = int(str(followers)[-2:])
     try:
         with open('foer.txt', 'r') as f:
@@ -46,7 +52,7 @@ if __name__ == '__main__':
 
     print('  Generating image...')
     progress_image = gen_progress_image(ppl)
-    profile_image = gen_profile_image(progress_image, followers, ppl=ppl)
+    profile_image = gen_profile_image(progress_image, followers, ppl=ppl, selenium=using_selenium)
     date = now.strftime('%Y%m%d')
     time = now.strftime('%H%M%S')
 
