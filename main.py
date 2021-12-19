@@ -11,7 +11,8 @@ def get_followers_count(user):
     href = f'/{user}/followers'
     followers_element = driver.find_element_by_xpath(f'//a[@href=\"{href}\"]')
     followers_count_text = followers_element.find_element_by_tag_name('span').find_element_by_tag_name('span').text
-    driver.get('about:blank')
+    # driver.get('about:blank')
+    driver.quit()
     return int(followers_count_text.replace(',', ''))
 
 
