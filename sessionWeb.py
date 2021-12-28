@@ -8,4 +8,6 @@ options.add_argument('--user-data-dir=/home/kuma/data/chrome')
 # options.add_argument('--disable-gpu')
 # options.add_argument("--disable-software-rasterizer")
 
-driver = wd.Chrome(executable_path='/usr/local/bin/chromedriver', options=options)
+
+def get_driver():
+    return wd.Chrome(executable_path='/usr/local/bin/chromedriver', options=options)
