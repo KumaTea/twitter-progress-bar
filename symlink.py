@@ -3,7 +3,7 @@ import os
 
 home = '/home/kuma'
 this_proj = 'tt/twitter-progress-bar'
-link = 'www/s/prog/avatar.png'
+link = 'web/s/prog/avatar.png'
 
 
 def symlink(file):

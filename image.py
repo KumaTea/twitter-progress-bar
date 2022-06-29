@@ -6,7 +6,8 @@ from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 
 
-progress_path = 'img/progress.png'
+# progress_path = 'img/progress.png'
+progress_path = 'img/color-wheel.png'
 head_path = 'img/char.png'
 back_path = 'img/back.png'
 original_path = 'img/original.jpg'
@@ -17,8 +18,9 @@ black_rgba = (0, 0, 0, 255)
 
 def gen_progress_image(ppl, xrange=200, yrange=200):
     progress = Image.open(progress_path)
+    if not progress.mode == 'RGBA':
+        progress = progress.convert('RGBA')
     progress_array = np.asarray(progress)
-
     polygon = [(i[0], i[1]) for i in process_polygon(calc_polygon(calc_coord(ppl), xrange, yrange))]
 
     mask_progress = Image.new('L', progress.size, 0)
