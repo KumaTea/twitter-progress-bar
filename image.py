@@ -6,8 +6,8 @@ from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 
 
-# progress_path = 'img/progress.png'
-progress_path = 'img/color-wheel.png'
+progress_path = 'img/progress.png'
+# progress_path = 'img/color-wheel.png'
 head_path = 'img/char.png'
 back_path = 'img/back.png'
 original_path = 'img/original.jpg'
@@ -53,11 +53,12 @@ def gen_progress_image(ppl, xrange=200, yrange=200):
 
 
 def gen_profile_image(progress, total_ppl, font_size=16, ppl=None, selenium=True):
-    original = Image.open(original_path)
+    # original = Image.open(original_path)
+    original = Image.open(back_path)
     profile = Image.new("RGBA", original.size)
-    profile = Image.alpha_composite(profile, Image.open(back_path))
+    profile = Image.alpha_composite(profile, Image.open(back_path).convert('RGBA'))
     profile = Image.alpha_composite(profile, progress)
-    profile = Image.alpha_composite(profile, Image.open(head_path))
+    profile = Image.alpha_composite(profile, Image.open(head_path).convert('RGBA'))
 
     txt = Image.new("RGBA", original.size, (255, 255, 255, 0))
     fnt = ImageFont.truetype('calibri.ttf', font_size)
@@ -73,7 +74,7 @@ def gen_profile_image(progress, total_ppl, font_size=16, ppl=None, selenium=True
 
     draw.text((350, 5), str(total_ppl), font=fnt2, fill=black_rgba)
 
-    draw.text((5, 355), f'src:\n{repo_link}', font=fnt3, fill=black_rgba)
+    draw.text((5, 355), f'src:\n{repo_link}', font=fnt3, fill=(255, 128, 0, 255))
 
     # ppl should be int if given
     if not ppl:
